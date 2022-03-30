@@ -17,9 +17,10 @@ module.exports.getAuthor = (request, response) => {
 module.exports.updateAuthor = (request, response) => {
   Author.findOneAndUpdate({ _id: request.params.id }, request.body, {
     new: true,
+    runValidators: true,
   })
-    .then((updateAuthor) => response.json(updatedAuthor))
-    .catch((err) => response.json(err));
+    .then((updatedAuthor) => response.json(updatedAuthor))
+    .catch((err) => response.status(400).json(err));
 };
 
 module.exports.deleteAuthor = (request, response) => {

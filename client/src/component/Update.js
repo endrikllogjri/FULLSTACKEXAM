@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 const Update = (props) => {
   const { id } = useParams();
   const [name, setName] = useState('');
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   
 
@@ -18,15 +19,21 @@ const Update = (props) => {
   }, []);
   const updateAuthor = (e) => {
     e.preventDefault();
-    axios
-      .put("http://localhost:8000/api/author/" + id, {
-        name, 
+    axios.put("http://localhost:8000/api/author/" + id, {
+        name,
       })
       .then((res) => {
-        console.log(res);
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.data.message === undefined){
+          console.log(err.response)
+          setErrors({name: {message: "Name is already used"} });
+        }
+        else{
+        console.log(err);
+        setErrors(err.response.data.errors);
+      }});
   };
   return (
     <div>
@@ -43,6 +50,7 @@ const Update = (props) => {
             }}
           />
         </p>
+        {errors.name ? <p>{errors.name.message}</p> : null}
         <button type="button" className="add-btn-c add-btn" >
         <Link to="/">Cancel</Link>
       </button>

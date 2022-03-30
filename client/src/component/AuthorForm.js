@@ -19,9 +19,13 @@ const AuthorForm = (props) => {
         navigate("/");
       })
       .catch((err) => {
+        if (err.response.data.errors === undefined){
+          setErrors({name: {message: "Name is already used"} });
+        }
+        else{
         console.log(err.response.data.errors.name.message);
         setErrors(err.response.data.errors);
-      });
+      }});
   };
 
   return (
