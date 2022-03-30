@@ -1,22 +1,20 @@
 import { useState } from "react";
 import axios from "axios";
-import ObjectForm from "./ObjectForm";
-import ObjectList from "./ObjectList";
+import AuthorList from "./AuthorList";
 
 function Main() {
-  const [object, setObject] = useState([]);
+  const [author, setAuthor] = useState([]);
 
-  const removeFromDom = (objectId) => {
-    setObject(object.filter((object) => object._id != objectId));
+  
+  const removeFromDom = (authorId) => {
+    setAuthor(author.filter((author) => author._id != authorId));
   };
 
   return (
     <div>
-      <ObjectForm object={object} setObject={setObject} />
-      <hr />
-      <ObjectList
-        object={object}
-        setObject={setObject}
+      <AuthorList
+        author={author}
+        setAuthor={setAuthor}
         removeFromDom={removeFromDom}
       />
     </div>

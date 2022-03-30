@@ -1,8 +1,8 @@
 import './App.css';
 import Main from './component/Main';
-import Detail from './component/Detail';
 import Update from './component/Update';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import AuthorForm from './component/AuthorForm';
 
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route element={<Main/>} path="/" default />
-        <Route element={<Detail/>} path="/objects/:id" />
-        <Route element={<Update/>} path="/objects/edit/:id"/> 
+        <Route element={<AuthorForm/>} path="/author/"/>
+        <Route element={<Update/>} path="/author/edit/:id"/> 
       </Routes>
       </BrowserRouter>
     </div>

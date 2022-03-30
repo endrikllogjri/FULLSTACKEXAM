@@ -1,32 +1,26 @@
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 const Update = (props) => {
   const { id } = useParams();
-  const [price, setPrice] = useState(0);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState('');
   const navigate = useNavigate();
   
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/object/" + id)
+      .get("http://localhost:8000/api/author/" + id)
       .then((res) => {
-        setTitle(res.data.title);
-        setPrice(res.data.price);
-        setDescription(res.data.description);
+        setName(res.data.name);
       })
       .catch((err) => console.log(err));
   }, []);
-  const updateObject = (e) => {
+  const updateAuthor = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:8000/api/object/" + id, {
-        title, 
-        price,
-        description, 
+      .put("http://localhost:8000/api/author/" + id, {
+        name, 
       })
       .then((res) => {
         console.log(res);
@@ -36,45 +30,24 @@ const Update = (props) => {
   };
   return (
     <div>
-      <h1>Update a Object</h1>
-      <form onSubmit={updateObject}>
+      <Link to="/">Go to Home</Link>
+      <h1>Update a Author</h1>
+      <form onSubmit={updateAuthor}>
         <p>
-          <label>Title</label>
-          <br />
-          <input
+          <input className="update-input"
             type="text"
-            name="title"
-            value={title}
+            name="name"
+            value={name}
             onChange={(e) => {
-              setTitle(e.target.value);
+              setName(e.target.value);
             }}
           />
         </p>
-        <p>
-          <label>Price</label>
-          <br />
-          <input
-            type="number"
-            name="price"
-            value={price}
-            onChange={(e) => {
-              setPrice(e.target.value);
-            }}
-          />
-        </p>
-        <p>
-          <label>Description</label>
-          <br />
-          <input
-            type="text"
-            name="description"
-            value={description}
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          />
-        </p>
-        <input type="submit" />
+        <button type="button" className="add-btn-c add-btn" >
+        <Link to="/">Cancel</Link>
+      </button>
+
+        <input className="update-btn" type="submit" />
       </form>
     </div>
   );
