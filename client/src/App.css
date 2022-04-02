@@ -7,10 +7,12 @@
 }
 .author-list{
   padding-left: 20px;
+  text-align: center;
 }
 .del-btn{
   margin-left: 10px;
   background-color: red;
+  color: aliceblue;
   padding: 5px;
   padding-left: 20px;
   padding-right:20px;
@@ -52,12 +54,18 @@ table, th, td {
   border-radius: 5px;
 }
 
-.add-btn-c a{
-  color: antiquewhite;
-  padding: 5px ;
-  font-size: 18px;
-  text-decoration: none;
+.add-btn-c {
+  background-color: red;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right:20px;
+  border-radius: 5px;
+  font-size: 18px; 
   margin-right: 10px;
+}
+.add-btn-c a {
+  color: antiquewhite;
+  text-decoration: none;
 }
 .add-btn{
   background-color: rgb(8, 95, 44);
@@ -86,4 +94,8 @@ table, th, td {
 
 table{
   margin-bottom: 20px;
+}
+
+.invalid {
+  border: 1px solid red;
 }

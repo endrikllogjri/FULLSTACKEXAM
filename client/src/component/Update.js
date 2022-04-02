@@ -52,7 +52,7 @@ const Update = (props) => {
         </p>
         {errors.name ? <p>{errors.name.message}</p> : null}
         <button type="button" className="add-btn-c add-btn" >
-        <Link to="/">Cancel</Link>
+        <Link  to="/">Cancel</Link>
       </button>
 
         <input className="update-btn" type="submit" />

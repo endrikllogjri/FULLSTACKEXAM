@@ -30,24 +30,24 @@ const AuthorList = (props) => {
     <div>
       <div>
         <h2>Favorite Author</h2>
-        <Link to="/author/">Add</Link>
+        <Link className="edit-link" to="/author/">Add</Link>
         <h3>We have quotes by:</h3>
       </div>
-      {author.map((author, index) => {
-        return (
-          <div key={index}>
-            <div className="container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Author</th>
-                    <th>Actions available</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
+      <div>
+        <div className="container">
+          <table>
+            <thead>
+              <tr>
+                <th>Author</th>
+                <th>Actions available</th>
+              </tr>
+            </thead>
+            <tbody>
+              {author.map((author, index) => {
+                return (
+                  <tr key={index}>
                     <td className="name">
-                        <h1>{author.name}</h1>
+                      <strong>{author.name}</strong>
                     </td>
                     <td>
                       <div className="author-list">
@@ -68,12 +68,12 @@ const AuthorList = (props) => {
                       </div>
                     </td>
                   </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        );
-      })}
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

@@ -10,38 +10,41 @@ const AuthorForm = (props) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
-    axios
+    if (!name.length) {
+      setErrors({name: { message: 'Name is mandatory'}});
+    } else {
+      axios
       .post("http://localhost:8000/api/author", {
-        name,
-      })
-      .then((res) => {
-        navigate("/");
-      })
-      .catch((err) => {
-        if (err.response.data.errors === undefined){
-          setErrors({name: {message: "Name is already used"} });
-        }
-        else{
-        console.log(err.response.data.errors.name.message);
-        setErrors(err.response.data.errors);
-      }});
+          name,
+        })
+        .then((res) => {
+          navigate("/");
+        })
+        .catch((err) => {
+          if (err.response.data.errors === undefined){
+            setErrors({name: {message: "Name is already used"} });
+          }
+          else{
+          console.log(err.response.data.errors.name.message);
+          setErrors(err.response.data.errors);
+        }});
+    }
   };
 
   return (
     <form onSubmit={onSubmitHandler}>
-      <Link to="/">Go to Home</Link>
+      <Link className="edit-link" to="/">Go to Home</Link>
       <h1>Name of the Author</h1>
       <p>
         <input
-          className="input-add"
+          className={`input-add ${!name.length ? 'invalid' : ''}`}
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         {errors.name ? <p>{errors.name.message}</p> : null}
       </p>
-      <button type="button" className="add-btn-c add-btn" >
+      <button type="button" className="add-btn-c" >
         <Link to="/">Cancel</Link>
       </button>
       <input className="add-btn" type="submit" />

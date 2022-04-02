@@ -30,7 +30,7 @@ module.exports.deleteAuthor = (request, response) => {
 };
 
 module.exports.getAllAuthor = (request, response) => {
-  Author.find({})
+  Author.find({}).sort({name: 1})
     .then((author) => {
       console.log(author);
       response.json(author);
