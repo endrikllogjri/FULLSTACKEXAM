@@ -2,68 +2,74 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const AuthorList = (props) => {
-  const { removeFromDom, author, setAuthor } = props;
+const PetList = (props) => {
+  const { removeFromDom, pets, setPets } = props;
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/author")
+      .get("http://localhost:8000/api/pet")
       .then((res) => {
         console.log(res.data);
-        setAuthor(res.data);
+        setPets(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const deleteAuthor = (authorId) => {
+  const deletePets = (petsId) => {
     axios
-      .delete("http://localhost:8000/api/author/" + authorId)
+      .delete("http://localhost:8000/api/pet/" + petsId)
       .then((res) => {
-        removeFromDom(authorId);
+        removeFromDom(petsId);
       })
       .catch((err) => console.log(err));
   };
 
   return (
     <div>
-      <div>
-        <h2>Favorite Author</h2>
-        <Link className="edit-link" to="/author/">Add</Link>
-        <h3>We have quotes by:</h3>
+      <div  className="shelter">
+        <h2>Pet Shelter</h2>
+        <h3>These pets are looking for a good home</h3>
+        <Link className="edit-link" to="/pet/">
+          Add
+        </Link>
       </div>
       <div>
         <div className="container">
           <table>
             <thead>
               <tr>
-                <th>Author</th>
-                <th>Actions available</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {author.map((author, index) => {
+              {pets.map((pets, index) => {
                 return (
                   <tr key={index}>
                     <td className="name">
-                      <strong>{author.name}</strong>
+                      <strong>{pets.name}</strong>
+                    </td>
+                    <td className="name">
+                      <strong>{pets.type}</strong>
                     </td>
                     <td>
-                      <div className="author-list">
-                        <Link
-                          className="edit-link"
-                          to={`/author/edit/${author._id}`}
-                        >
+                      <div className="pet-list">
+                        <Link className="edit-link" to={`/pet/edit/${pets._id}`}>
                           Edit
+                        </Link>
+                        <Link className="edit-link" to={`/pet/${pets._id}`}>
+                          Details
                         </Link>
                         <button
                           className="del-btn"
                           onClick={(e) => {
-                            deleteAuthor(author._id);
+                            deletePets(pets._id);
                           }}
                         >
-                          Delete
+                          Adopt {pets.name}
                         </button>
                       </div>
                     </td>
@@ -77,4 +83,4 @@ const AuthorList = (props) => {
     </div>
   );
 };
-export default AuthorList;
+export default PetList;

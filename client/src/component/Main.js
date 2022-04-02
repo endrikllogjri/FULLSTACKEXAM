@@ -1,22 +1,16 @@
 import { useState } from "react";
-import axios from "axios";
-import AuthorList from "./AuthorList";
+import PetList from "./PetList";
 
 function Main() {
-  const [author, setAuthor] = useState([]);
+  const [pets, setPets] = useState([]);
 
-  
-  const removeFromDom = (authorId) => {
-    setAuthor(author.filter((author) => author._id != authorId));
+  const removeFromDom = (petsId) => {
+    setPets(pets.filter((pets) => pets._id != petsId));
   };
 
   return (
     <div>
-      <AuthorList
-        author={author}
-        setAuthor={setAuthor}
-        removeFromDom={removeFromDom}
-      />
+      <PetList pets={pets} setPets={setPets} removeFromDom={removeFromDom} />
     </div>
   );
 }
